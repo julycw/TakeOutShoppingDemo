@@ -1,0 +1,11 @@
+.navbar-nav>li>a{
+	color:white;
+	font-weight:600;
+	font-size:14px;	
+}
+.navbar-nav>li>a:hover{
+	background-color:rgb(253, 130, 41);
+}
+.navbar-static-top{
+	background-color:orange;
+}
