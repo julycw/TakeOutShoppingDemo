@@ -12,5 +12,8 @@ return array(
     'LOAD_EXT_FILE'=>'extends_cls', //公共函数
     'LAYOUT_ON'=>true,
     'LAYOUT_NAME'=>'layout',
+    //
+    'TMPL_L_DELIM'=>'{{',
+    'TMPL_R_DELIM'=>'}}',
 );
 ?>

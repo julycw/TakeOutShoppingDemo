@@ -42,8 +42,13 @@
             </li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="__APP__/User/login">登陆</a></li>
-            <li><a href="__APP__/User/register">注册</a></li>
+            <eq name="isLogined" value="true">
+              <li><a href="__APP__/User">{{$nickName}}</a></li>
+              <li><a href="__APP__/Order">我的订单</a></li>
+            <else/>
+              <li><a href="__APP__/User/login">登陆</a></li>
+              <li><a href="__APP__/User/register">注册</a></li>
+            </eq>
             <li><a href="__APP__/Cart">购物车</a></li>
           </ul>
         </nav>
@@ -51,6 +56,34 @@
     </header>
 
     <div class="container">
+      <volist name="tips" id="tip">
+        <switch name="tip.level">
+          <case value="warning">
+            <div class="alert alert-warning alert-dismissible" role="alert">
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <strong>警告!</strong> {{$tip.msg}}
+            </div>
+          </case>
+          <case value="success">
+            <div class="alert alert-success alert-dismissible" role="alert">
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <strong>成功!</strong> {{$tip.msg}}
+            </div>
+          </case>
+          <case value="info">
+            <div class="alert alert-info alert-dismissible" role="alert">
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <strong>提示!</strong> {{$tip.msg}}
+            </div>
+          </case>
+          <case value="danger">
+            <div class="alert alert-danger alert-dismissible" role="alert">
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <strong>危险!</strong> {{$tip.msg}}
+            </div>
+          </case>
+        </switch>
+      </volist>
       {__CONTENT__}
     </div>
     

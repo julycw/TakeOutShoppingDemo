@@ -2,8 +2,8 @@
 class UserAction extends CustomAction {
     public function index(){
     	$UserModel = D("User");
-    	$UserName = session("username");
-    	$user = $UserModel->where("UserName='$username'")->find();
+    	$UserName = session("userName");
+    	$user = $UserModel->where("userName='$UserName'")->find();
     	if(!$user){
     		$this->redirect("/User/login");
     	}
@@ -22,12 +22,14 @@ class UserAction extends CustomAction {
     		$user = $UserModel->where("UserName='$userName'")->find();
     		if($user){
     			if($user['password'] == md5($password)){
+                    session("userName",$user['userName']);
+                    session("nickName",$user['nickName']);
     				$this->continueUrl();
     			}else{
-    				//print errors
+                    $this->addTip("密码错误");
     			}
     		}else{
-    			//print errors
+                $this->addTip("未找到该用户");
     		}
     	}
 
@@ -35,22 +37,28 @@ class UserAction extends CustomAction {
     }
 
     public function logout(){
-    	session("username",null);
+        session("userName",null);
+        session("nickName",null);
 		$this->redirect("/User/login");
     }
 
     public function register(){
     	if(IS_POST){
     		$UserModel = D("User");
+            $_POST['roleId'] = 1;
+            $_POST['password'] = md5($_POST['password']);
     		$user = $UserModel->create();
     		if($user){
-    			if($user->save()){
+                $user['nickName'] = $user['nickName']?$user['nickName']:$user['userName'];
+    			if($UserModel->add()){
+                    session("userName",$user['userName']);
+                    session("nickName",$user['nickName']);
     				$this->continueUrl();
     			}else{
-    				//print errors
+                    $this->addTip($UserModel->getError());
     			}
     		}else{
-    			//print errors
+                $this->addTip("信息错误");
     		}
     	}
 
