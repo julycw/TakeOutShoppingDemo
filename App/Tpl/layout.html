@@ -40,13 +40,22 @@
           </ul>
           <ul class="nav navbar-nav navbar-right">
             <eq name="isLogined" value="true">
-              <li><a href="__APP__/User">{{$nickName}}</a></li>
+              <li>
+                  <a href="#" data-toggle="dropdown" aria-expanded="true">{{$nickName}}</a>
+                  <ul class="dropdown-menu" role="menu">
+                    <li><a href="__APP__/User">个人信息</a></li>
+                    <li class="divider"></li>
+                    <li><a href="__APP__/User/logout">退出登录</a></li>
+                  </ul>
+              </li>
               <li><a href="__APP__/Order">我的订单</a></li>
             <else/>
               <li><a href="__APP__/User/login">登陆</a></li>
               <li><a href="__APP__/User/register">注册</a></li>
             </eq>
-            <li><a href="__APP__/Cart">购物车</a></li>
+            <li><a href="__APP__/Cart">购物车 <span class="badge">14</span></a></li>
+            <!-- Single button -->
+
           </ul>
         </nav>
       </div>
