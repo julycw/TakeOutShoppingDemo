@@ -9,7 +9,7 @@ return array(
     'DB_PORT'   => 3306, // 端口
     'DB_PREFIX' => '', // 数据库表前缀
     //加载common
-    'LOAD_EXT_FILE'=>'extends_cls', //公共函数
+    'LOAD_EXT_FILE'=>'extends_cls,utils,shortcut', //公共函数
     'LAYOUT_ON'=>true,
     'LAYOUT_NAME'=>'layout',
     //

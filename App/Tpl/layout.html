@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Demo</title>
+    <title>TOC is very simple!</title>
 
     <!-- Demo -->
     <link href="__PUBLIC__/css/bootstrap.min.css" rel="stylesheet">
@@ -27,13 +27,10 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a href="__APP__/Home" class="navbar-brand">Demo</a>
+          <a href="__APP__/Home" class="navbar-brand">Logo Here</a>
         </div>
         <nav class="collapse navbar-collapse bs-navbar-collapse">
           <ul class="nav navbar-nav">
-            <li>
-              <a href="__APP__/Home">首页</a>
-            </li>
             <li class="active">
               <a href="__APP__/Shop">点餐</a>
             </li>
@@ -55,38 +52,44 @@
       </div>
     </header>
 
-    <div class="container">
-      <volist name="tips" id="tip">
-        <switch name="tip.level">
-          <case value="warning">
-            <div class="alert alert-warning alert-dismissible" role="alert">
-              <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-              <strong>警告!</strong> {{$tip.msg}}
-            </div>
-          </case>
-          <case value="success">
-            <div class="alert alert-success alert-dismissible" role="alert">
-              <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-              <strong>成功!</strong> {{$tip.msg}}
-            </div>
-          </case>
-          <case value="info">
-            <div class="alert alert-info alert-dismissible" role="alert">
-              <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-              <strong>提示!</strong> {{$tip.msg}}
-            </div>
-          </case>
-          <case value="danger">
-            <div class="alert alert-danger alert-dismissible" role="alert">
-              <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-              <strong>危险!</strong> {{$tip.msg}}
-            </div>
-          </case>
-        </switch>
-      </volist>
+    <volist name="tips" id="tip">
+      <switch name="tip.level">
+        <case value="warning">
+          <div class="alert alert-warning alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <strong>警告!</strong> {{$tip.msg}}
+          </div>
+        </case>
+        <case value="success">
+          <div class="alert alert-success alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <strong>成功!</strong> {{$tip.msg}}
+          </div>
+        </case>
+        <case value="info">
+          <div class="alert alert-info alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <strong>提示!</strong> {{$tip.msg}}
+          </div>
+        </case>
+        <case value="danger">
+          <div class="alert alert-danger alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <strong>危险!</strong> {{$tip.msg}}
+          </div>
+        </case>
+      </switch>
+    </volist>
+
+    <div class="container" style="margin-bottom:50px;">
       {__CONTENT__}
     </div>
-    
+<!-- 
+    <nav class="navbar navbar-default navbar-fixed-bottom">
+      <div class="container" style="text-align:center;">
+        <p>Endville © All Rights Reseverd</p>
+      </div>
+    </nav> -->
     <!-- jQuery (necessary for Demo's JavaScript plugins) -->
     <script src="__PUBLIC__/js/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->

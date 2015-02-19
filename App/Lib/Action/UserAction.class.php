@@ -24,6 +24,7 @@ class UserAction extends CustomAction {
     			if($user['password'] == md5($password)){
                     session("userName",$user['userName']);
                     session("nickName",$user['nickName']);
+                    session("role",$user['role']);
     				$this->continueUrl();
     			}else{
                     $this->addTip("密码错误");
@@ -39,13 +40,14 @@ class UserAction extends CustomAction {
     public function logout(){
         session("userName",null);
         session("nickName",null);
+        session("role",null);
 		$this->redirect("/User/login");
     }
 
     public function register(){
     	if(IS_POST){
     		$UserModel = D("User");
-            $_POST['roleId'] = 1;
+            $_POST['role'] = 1;
             $_POST['password'] = md5($_POST['password']);
     		$user = $UserModel->create();
     		if($user){

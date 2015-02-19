@@ -1,5 +1,5 @@
 <?php
-class CustomAction extends Action{
+class BaseAction extends Action{
 	protected $tips;
 
 	public function _initialize(){
@@ -15,7 +15,7 @@ class CustomAction extends Action{
 		$redirect = $redirect?$redirect:"redirect";
 		$redirect_url = $_GET[$redirect]?$_GET[$redirect]:$_POST[$redirect];
 		$redirect_url = $redirect_url?$redirect_url:"/";
-		$this->redirect($redirect_url);
+		redirect($redirect_url);
 	}
 
 	public function addTip($msg,$level){
@@ -29,5 +29,63 @@ class CustomAction extends Action{
 		$this->assign("tips",$this->tips);
 		return parent::display($action,$charset,$format);
 	}
+
+}
+
+class CustomAction extends BaseAction{
+	public function _initialize(){
+		parent::_initialize();
+	}
+}
+
+class AdmAction extends BaseAction{
+	public function _initialize(){
+		parent::_initialize();
+		if(session("role") != "admin"){
+			$url = get_url();
+			redirect(__APP__."/User/login.html?redirect=$url");
+		}
+	}
+
+	public function handleModel($model){
+    	$ThisModel = D($model);
+    	$count = $ThisModel->count();
+    	$pageSize = 20;
+    	$pageIndex = $_GET['page']?$_GET['page']:1;
+    	$pagenation = new Pagination($count,$pageSize,$pageIndex);
+		$data = $ThisModel->order("ID desc")->limit($pagenation->firstRow.','.$pagenation->listRows)->relation(true)->select();
+		$this->assign("pageInfo", $pagenation->getPageInfo());
+		$this->assign("list", $data);
+		$this->assign("page",$pageIndex);
+    	$this->display();
+	}
+}
+function handleModelAdd($model){
+	$ThisModel = D($model);
+	if($ThisModel->create()){
+		if($ThisModel->add()){
+			return true;
+		}
+	}
+	return false;
+}
+
+function handleModelModify($model){
+	$ThisModel = D($model);
+	if($ThisModel->create()){
+		if($ThisModel->save()){
+			return true;
+		}
+	}
+	return false;
+}
+
+function handleModelDelete($model){
+	$ThisModel = D($model);
+	$id = $_POST['id'];
+	if($ThisModel->relation(true)->delete($id)){
+		return true;
+	}
+	return false;
 }
 ?>

@@ -1,5 +1,5 @@
 <?php
-class CategoryModel extends Model{
+class CategoryModel extends RelationModel{
 	protected $pk = "id";
     protected $fields = array(
         'id', 

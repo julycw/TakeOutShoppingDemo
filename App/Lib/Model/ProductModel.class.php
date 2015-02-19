@@ -1,5 +1,5 @@
 <?php
-class ProductModel extends Model{
+class ProductModel extends RelationModel{
 	protected $pk = "id";
     protected $fields = array(
         'id', 
@@ -7,6 +7,14 @@ class ProductModel extends Model{
         'unitPrice',
         'categoryCode',
         'imageUrl'
+    );
+    protected $_link = array(
+        'categoryCode'=> array(  
+     		'mapping_type'=>BELONGS_TO,
+      	'class_name'=>'Category',
+      	'foreign_key'=>'categoryCode',
+      	'mapping_name'=>'category',
+ 		),
     );
 }
 ?>

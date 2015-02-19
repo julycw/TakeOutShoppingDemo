@@ -9,3 +9,36 @@
 .navbar-static-top{
 	background-color:orange;
 }
+
+.product-wrapper{
+	height:300px;
+	width:200px;
+	margin-bottom:15px;
+}
+.product-wrapper>.product-image{
+	position:relative;
+	height:200px;
+}
+.product-wrapper>.product-image>img{
+	width:100%;
+	height:100%;
+}
+.product-wrapper>.product-price{
+	color: #E4393C;
+	font-weight: 400;
+	font-family: Verdana;
+	margin-right: 10px;
+	font-size: 18px;
+	line-height: 36px;
+}
+ul.product-list{
+	list-style:none;
+}
+ul.product-list>li{
+	float:left;
+	margin-right:12px;
+	margin-bottom:5px;
+}
+nav.nav-pagination{
+	text-align:center;
+}

@@ -1,12 +1,12 @@
 <?php
-class UserModel extends Model{
+class UserModel extends RelationModel{
 	protected $pk = "id";
     protected $fields = array(
         'id', 
         'userName',
         'password',
         'nickName',
-        'roleId',
+        'role',
     );
 }
 ?>

@@ -1,1 +1,35 @@
-点餐
+<div class="row">
+	<div class="col-md-2">
+		<div class="list-group">
+			<a class="list-group-item" href="__APP__/Shop">
+				全部
+			</a>
+			<volist name="categories" id="category">
+				<a class="list-group-item" href="__APP__/Shop?category={{$category.categoryCode}}">
+					<!-- <span class="badge">14</span> -->
+					{{$category.categoryName}}
+				</a>
+			</volist>
+		</div>
+	</div>
+	<div class="col-md-10">
+		<ul class="product-list">
+			<volist name="products" id="product">
+				<li>
+					<div class="product-wrapper">
+						<div class="product-image">
+							<img src="__PUBLIC__{{$product.imageUrl}}" alt="..." class="img-thumbnail">
+						</div>
+						<strong class="product-price">￥{{$product.unitPrice}}</strong>
+						<p class="product-details">{{$product.productName}}</p>
+						<div class="btn-group btn-group-xs btn-group-justified" role="group">
+					      <a href="#" class="btn btn-default" role="button">收藏</a>
+					      <a href="#" class="btn btn-default" role="button">下单</a>
+					      <a href="#" class="btn btn-default" role="button">购物车</a>
+					    </div>
+					</div>
+				</li>
+			</volist>
+		</ul>
+	</div>
+</div>

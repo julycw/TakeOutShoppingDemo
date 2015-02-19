@@ -1,0 +1,141 @@
+<div class="wall">
+	<!-- Button trigger modal -->
+	<button type="button" class="btn btn-default" data-toggle="modal" data-target="#addModal">
+	  添加
+	</button>
+</div>
+<nav class="nav-pagination">
+	<ul class="pagination">
+	    <li <neq name="pageInfo.hasPrev" value="yes">class="disabled"</neq>>
+	      	<a href="__APP__/Admin/product?page={{$pageInfo.prevPage}}" aria-label="Previous">
+		        <span aria-hidden="true">&laquo;</span>
+	      	</a>
+	    </li>
+		<volist name="pageInfo.pages" id="page">
+		    <li <eq name="page" value="$pageInfo.pageIndex">class="active"</eq>><a href="__APP__/Admin/product?page={{$page}}">{{$page}}</a></li>
+		</volist>
+	    <li <neq name="pageInfo.hasNext" value="yes">class="disabled"</neq>>
+	      <a href="__APP__/Admin/product?page={{$pageInfo.nextPage}}" aria-label="Next">
+	        <span aria-hidden="true">&raquo;</span>
+	      </a>
+	    </li>
+	</ul>
+</nav>
+<table class="table data-list table-hover table-condensed" data="__APP__/Admin/productList">
+	<caption>商品</caption>
+	<thead>
+		<tr>
+			<th>商品名称</th>
+			<th>分类</th>
+			<th>单价</th>
+			<th>操作</th>
+		</tr>
+	</thead>
+	<tbody>
+		<volist name="list" id="item">
+			<tr>
+				<td>{{$item.productName}}</td>
+				<td>{{$item.category.categoryName}}</td>
+				<td>{{$item.unitPrice}}</td>
+				<td>
+					<div class="btn-group" role="group">
+						<button type="button" class="btn btn-default btn-sm btn-modify" data-toggle="modal" data-target="#modifyModal" data-id="{{$item.id}}">修改</button>
+						<button type="button" class="btn btn-default btn-sm btn-delete" data-toggle="modal" data-target="#deleteModal" data-id="{{$item.id}}">删除</button>
+					</div>
+				</td>
+			</tr>
+		</volist>
+	</tbody>
+</table>
+<nav class="nav-pagination">
+	<ul class="pagination">
+	    <li <neq name="pageInfo.hasPrev" value="yes">class="disabled"</neq>>
+	      	<a href="__APP__/Admin/product?page={{$pageInfo.prevPage}}" aria-label="Previous">
+		        <span aria-hidden="true">&laquo;</span>
+	      	</a>
+	    </li>
+		<volist name="pageInfo.pages" id="page">
+		    <li <eq name="page" value="$pageInfo.pageIndex">class="active"</eq>><a href="__APP__/Admin/product?page={{$page}}">{{$page}}</a></li>
+		</volist>
+	    <li <neq name="pageInfo.hasNext" value="yes">class="disabled"</neq>>
+	      <a href="__APP__/Admin/product?page={{$pageInfo.nextPage}}" aria-label="Next">
+	        <span aria-hidden="true">&raquo;</span>
+	      </a>
+	    </li>
+	</ul>
+</nav>
+
+<!-- Modal Add-->
+<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="addModalLabel">添加</h4>
+      </div>
+      <div class="modal-body">
+        <form id="add-form" action="__APP__/Admin/productAdd" method="post" enctype="multipart/form-data">
+			<div class="form-group">
+				<label for="productName">商品名称</label>
+				<input type="text" name="productName" class="form-control" id="productName">
+			</div>
+			<div class="form-group">
+				<label for="unitPrice">单价</label>
+				<input type="number" name="unitPrice" class="form-control" id="unitPrice">
+			</div>
+			<label for="categoryId">分类</label>
+		  	<select id="categoryId" class="form-control" name="categoryCode">
+				<volist name="categories" id="category">
+					<option value="{{$category.categoryCode}}">{{$category.categoryName}}</option>
+				</volist>
+			</select>
+			<div class="form-group">
+				<label for="imageUrl">图片</label>
+				<input type="file" name="image" class="form-control" id="imageUrl">
+			</div>
+		</form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+        <button type="button" class="btn btn-primary" id="btn-add-submit">确定</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Modal Modify-->
+<div class="modal fade" id="modifyModal" tabindex="-1" role="dialog" aria-labelledby="modifyModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="modifyModalLabel">修改</h4>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+        <button type="button" class="btn btn-primary">确定</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Modal Delete-->
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        确定删除？
+      </div>
+      <div class="modal-body" style="display:none;">
+        <form id="delete-form" action="__APP__/Admin/productDelete" method="post">
+        	<input type="hidden" name="id" />
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+        <button type="button" class="btn btn-danger" id="btn-delete-submit">确定</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,88 @@
+<nav class="nav-pagination">
+	<ul class="pagination">
+	    <li <neq name="pageInfo.hasPrev" value="yes">class="disabled"</neq>>
+	      	<a href="__APP__/Admin/order?page={{$pageInfo.prevPage}}" aria-label="Previous">
+		        <span aria-hidden="true">&laquo;</span>
+	      	</a>
+	    </li>
+		<volist name="pageInfo.pages" id="page">
+		    <li <eq name="page" value="$pageInfo.pageIndex">class="active"</eq>><a href="__APP__/Admin/order?page={{$page}}">{{$page}}</a></li>
+		</volist>
+	    <li <neq name="pageInfo.hasNext" value="yes">class="disabled"</neq>>
+	      <a href="__APP__/Admin/order?page={{$pageInfo.nextPage}}" aria-label="Next">
+	        <span aria-hidden="true">&raquo;</span>
+	      </a>
+	    </li>
+	</ul>
+</nav>
+<table class="table data-list table-hover table-condensed" data="__APP__/Admin/orderList">
+	<caption>商品</caption>
+	<thead>
+		<tr>
+			<th>订单编号</th>
+			<th>用户名</th>
+			<th>地址</th>
+			<th>电话</th>
+			<th>总价</th>
+			<th>状态</th>
+			<th>时间</th>
+			<th>操作</th>
+		</tr>
+	</thead>
+	<tbody>
+		<volist name="list" id="item">
+			<tr>
+				<td>{{$item.orderNumber}}</td>
+				<td>{{$item.userName}}</td>
+				<td>{{$item.address}}</td>
+				<td>{{$item.phone}}</td>
+				<td>{{$item.price}}</td>
+				<td>{{$item.status}}</td>
+				<td>{{$item.createOn}}</td>
+				<td>
+					<div class="btn-group" role="group">
+						<button type="button" class="btn btn-default btn-sm btn-details" data-toggle="modal" data-target="#modifyModal" data-id="{{$item.id}}">明细</button>
+						<button type="button" class="btn btn-default btn-sm btn-delete" data-toggle="modal" data-target="#deleteModal" data-id="{{$item.id}}">删除</button>
+					</div>
+				</td>
+			</tr>
+		</volist>
+	</tbody>
+</table>
+<nav class="nav-pagination">
+	<ul class="pagination">
+	    <li <neq name="pageInfo.hasPrev" value="yes">class="disabled"</neq>>
+	      	<a href="__APP__/Admin/order?page={{$pageInfo.prevPage}}" aria-label="Previous">
+		        <span aria-hidden="true">&laquo;</span>
+	      	</a>
+	    </li>
+		<volist name="pageInfo.pages" id="page">
+		    <li <eq name="page" value="$pageInfo.pageIndex">class="active"</eq>><a href="__APP__/Admin/order?page={{$page}}">{{$page}}</a></li>
+		</volist>
+	    <li <neq name="pageInfo.hasNext" value="yes">class="disabled"</neq>>
+	      <a href="__APP__/Admin/order?page={{$pageInfo.nextPage}}" aria-label="Next">
+	        <span aria-hidden="true">&raquo;</span>
+	      </a>
+	    </li>
+	</ul>
+</nav>
+
+<!-- Modal Delete-->
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        确定删除？
+      </div>
+      <div class="modal-body" style="display:none;">
+        <form id="delete-form" action="__APP__/Admin/orderDelete" method="post">
+        	<input type="hidden" name="id" />
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+        <button type="button" class="btn btn-danger" id="btn-delete-submit">确定</button>
+      </div>
+    </div>
+  </div>
+</div>
