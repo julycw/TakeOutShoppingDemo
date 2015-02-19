@@ -22,10 +22,10 @@
 						</div>
 						<strong class="product-price">￥{{$product.unitPrice}}</strong>
 						<p class="product-details">{{$product.productName}}</p>
-						<div class="btn-group btn-group-xs btn-group-justified" role="group">
+						<div class="btn-group btn-group-xs btn-group-justified" role="group" data-id="{{$product.id}}">
 					      <a href="#" class="btn btn-default" role="button">收藏</a>
-					      <a href="#" class="btn btn-default" role="button">下单</a>
-					      <a href="#" class="btn btn-default" role="button">+ 购物车</a>
+					      <a href="#" class="btn btn-default btn-order" role="button">下单</a>
+					      <a href="#" class="btn btn-default btn-cart-in" role="button">+ 购物车</a>
 					    </div>
 					</div>
 				</li>

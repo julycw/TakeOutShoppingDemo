@@ -25,6 +25,7 @@ class UserAction extends CustomAction {
                     session("userName",$user['userName']);
                     session("nickName",$user['nickName']);
                     session("role",$user['role']);
+                    $this->actionOnLogin();
     				$this->continueUrl();
     			}else{
                     $this->addTip("密码错误");
@@ -55,6 +56,8 @@ class UserAction extends CustomAction {
     			if($UserModel->add()){
                     session("userName",$user['userName']);
                     session("nickName",$user['nickName']);
+                    session("role",$user['role']);
+                    $this->actionOnLogin();
     				$this->continueUrl();
     			}else{
                     $this->addTip($UserModel->getError());
@@ -65,5 +68,26 @@ class UserAction extends CustomAction {
     	}
 
 		$this->display();
+    }
+
+    private function actionOnLogin(){
+        if(cookie('cart')){
+            $CartModel = D("Cart");
+
+            $productList = json_decode(cookie('cart'),true);
+            foreach ($productList as $value) {
+                $value['userName'] = session('userName');
+                $item = $CartModel->where("userName='".session('userName')."' and productId=".$value['productId'])->find();
+                if($item){
+                    $item['quantity'] += $value['quantity'];
+                    $CartModel->data($item)->save();
+                }else{
+                    $CartModel->data($value)->add();
+                }
+            }
+
+
+            cookie('cart',null);
+        }
     }
 }

@@ -10,12 +10,5 @@ class OrderDetailsModel extends RelationModel{
         'unitPrice',
         'quantity'
     );
-    protected $_link = array(
-        'Product'=>array(
-	        'mapping_type'  => HAS_ONE,
-	     	'class_name'    => 'Product',
-	     	'foreign_key'   => 'productId'
-     	),
- 	);
 }
 ?>
