@@ -76,17 +76,17 @@ class UserAction extends CustomAction {
 
             $productList = json_decode(cookie('cart'),true);
             foreach ($productList as $value) {
-                $value['userName'] = session('userName');
                 $item = $CartModel->where("userName='".session('userName')."' and productId=".$value['productId'])->find();
                 if($item){
                     $item['quantity'] += $value['quantity'];
                     $CartModel->data($item)->save();
                 }else{
-                    $CartModel->data($value)->add();
+                    $item['userName'] = session('userName');
+                    $item['quantity'] = $value['quantity'];
+                    $item['productId'] = $value['productId'];
+                    $CartModel->data($item)->add();
                 }
             }
-
-
             cookie('cart',null);
         }
     }

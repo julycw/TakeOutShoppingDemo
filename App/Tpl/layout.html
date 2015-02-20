@@ -45,7 +45,10 @@
           <ul class="nav navbar-nav navbar-right">
             <eq name="isLogined" value="true">
               <li>
-                  <a href="#" data-toggle="dropdown" aria-expanded="true">{{$nickName}}</a>
+                  <a href="#" data-toggle="dropdown" aria-expanded="false">
+                    {{$nickName}}
+                    <span class="caret"></span>
+                  </a>
                   <ul class="dropdown-menu" role="menu">
                     <li><a href="__APP__/User">个人信息</a></li>
                     <li class="divider"></li>
@@ -57,9 +60,31 @@
               <li><a href="__APP__/User/login">登陆</a></li>
               <li><a href="__APP__/User/register">注册</a></li>
             </eq>
-            <li><a href="__APP__/Cart">购物车 <span class="badge">{{$cartedProductQuantity}}</span></a></li>
+            <li>
+              <a id="btn-shopping-cart" href="#" data-toggle="dropdown">购物车 
+                <span class="badge cartedProductQuantity">0</span>
+              </a>
+              <ul class="dropdown-menu dropdown-cart" role="menu">
+                <li>
+                  <a href="__APP__/Cart">查看购物车</a>
+                </li>
+                <li class="divider"></li>
+                <li style="padding:5px;">
+                  <ul class="list-group">
+                  </ul>
+                  <p class="price-info">合计:￥<strong class="priceTotal">0</strong></p>
+                </li>
+                <li class="divider"></li>
+                <li style="padding-right:5px;">
+                    <span class="pull-right">
+                      <button type="button" class="btn btn-danger btn-sm" id="btn-cart-clear">清空</button>
+                      <!-- checkout modal -->
+                      <button type="button" class="btn btn-primary btn-sm" id="btn-cart-checkout">结账</button>
+                    </span>
+                </li>
+              </ul>
+            </li>
             <!-- Single button -->
-
           </ul>
         </nav>
       </div>

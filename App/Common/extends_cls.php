@@ -35,16 +35,6 @@ class BaseAction extends Action{
 class CustomAction extends BaseAction{
 	public function _initialize(){
 		parent::_initialize();
-		//购物车信息
-		if(session('userName')){
-			$userName = session('userName');
-			$CartModel = D('Cart');
-			$cart = $CartModel->where("userName='$userName'")->select();
-		}else{
-			$cart = json_decode(cookie("cart"),true);
-		}
-		$this->assign("cartedProductList",$cart);
-		$this->assign("cartedProductQuantity",count($cart));
 	}
 }
 

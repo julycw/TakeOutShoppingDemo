@@ -8,8 +8,8 @@ class CartModel extends RelationModel{
         'quantity',
     );
     protected $_link = array(
-        'Product'=>array(
-	        'mapping_type'  => HAS_ONE,
+        'product'=>array(
+	        'mapping_type'  => BELONGS_TO,
 	     	'class_name'    => 'Product',
 	     	'foreign_key'   => 'productId'
      	),

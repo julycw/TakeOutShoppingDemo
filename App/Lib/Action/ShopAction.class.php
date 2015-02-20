@@ -10,7 +10,7 @@ class ShopAction extends CustomAction {
     	if($categoryCode){
 	    	$this->assign("products",$ProductModel->where("categoryCode='$categoryCode'")->select());
     	}else{
-	    	$this->assign("products",$ProductModel->limit(20)->select());
+	    	$this->assign("products",$ProductModel->select());
     	}
 
     	$this->display();

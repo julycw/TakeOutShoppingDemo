@@ -4,6 +4,17 @@ class CartAction extends CustomAction {
     	$this->display();
     }
 
+    public function getDetails(){
+    	if(session('userName')){
+			$userName = session('userName');
+			$CartModel = D('Cart');
+			$cart = $CartModel->where("userName='$userName'")->relation(true)->select();
+		}else{
+			$cart = json_decode(cookie("cart"),true);
+		}
+		$this->ajaxReturn($cart,"JSON");
+    }
+
     public function putIn(){
     	$id = $_POST['productId'];
     	$quantity = $_POST['quantity']?$_POST['quantity']:1;
@@ -17,18 +28,14 @@ class CartAction extends CustomAction {
 	    		if($item){
 	    			$item['quantity'] += $quantity;
 	    			if($CartModel->data($item)->save()){
-	    				$return['code'] = '0';
 	    			}else{
-	    				$return['code'] = '1';
 	    			}
 	    		}else{
 	    			$_POST['userName'] = session('userName');
 	    			$_POST['productId'] = $id;
 	    			$_POST['quantity'] = $quantity;
 	    			if($CartModel->create() && $CartModel->add()){
-	    				$return['code'] = '0';
 	    			}else{
-	    				$return['code'] = '1';
 	    			}
 	    		}
 	    	}else{ // 未登录用户，将数据暂存cookies中，登录后转移到数据库
@@ -47,30 +54,24 @@ class CartAction extends CustomAction {
 	    			}
 	    		}
 	    		if(!$isFound){
-		    		$productList[] = ['productId'=>$id,'quantity'=>$quantity];
+	    			$product['productId'] = $id;
+	    			$product['quantity'] = $quantity;
+	    			$product['product']['unitPrice'] = $product['unitPrice'];
+	    			$product['product']['productName'] = $product['productName'];
+		    		$productList[] = $product;
 	    		}
 	    		cookie('cart',json_encode($productList));
-				$return['code'] = '0';
 	    	}
     	}
-    	
-    	$this->ajaxReturn($return,"JSON");
+    	$this->getDetails();
     }
 
-    public function putOut(){
-    	$id = $_POST['productId'];
-    	$quantity = $_POST['quantity'];
-    	if(session("userName")){
-    		$ProductModel = D("Product");
-    		if($ProductModel->delete($id)){
+    public function checkOut(){
 
-	    	}else{ 
+    }
 
-	    	}
-    	}else{
-
-    	}
-    	
-    	$this->ajaxReturn($product,"JSON");
+    public function clear(){
+		D("Cart")->where("userName='".session('userName')."'")->delete();
+		cookie('cart',null);
     }
 }

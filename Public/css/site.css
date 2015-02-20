@@ -3,7 +3,7 @@
 	font-weight:600;
 	font-size:14px;	
 }
-.navbar-nav>li>a:hover{
+.navbar-nav>li>a:hover,.nav .open>a, .nav .open>a:focus, .nav .open>a:hover{
 	background-color:rgb(253, 130, 41);
 }
 .navbar-static-top{
@@ -23,13 +23,18 @@
 	width:100%;
 	height:100%;
 }
-.product-wrapper>.product-price{
+.product-wrapper>.product-price,.price-info{
 	color: #E4393C;
 	font-weight: 400;
 	font-family: Verdana;
 	margin-right: 10px;
 	font-size: 18px;
 	line-height: 36px;
+}
+.price-info{
+	font-size: 18px;
+	line-height:18px;
+	text-align: center;
 }
 ul.product-list{
 	list-style:none;
@@ -41,4 +46,12 @@ ul.product-list>li{
 }
 nav.nav-pagination{
 	text-align:center;
+}
+
+.dropdown-cart{
+	width:300px;
+}
+
+.modal-checkout-content{
+	padding:20px;
 }
