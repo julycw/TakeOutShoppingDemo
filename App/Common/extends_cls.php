@@ -1,14 +1,25 @@
 <?php
 class BaseAction extends Action{
+	protected $actionName;
 	protected $tips;
+	protected $breadcrumb;
 
 	public function _initialize(){
 		$this->tips = array();
+		$this->breadcrumb = array();
 		if(session('userName') != ""){
 			$this->assign('userName',session('userName'));
 			$this->assign('nickName',session('nickName'));
 			$this->assign('isLogined',"true");
 		}
+
+		if($this->actionName){
+			$this->addBreadcrumb($this->actionName,MODULE_NAME);
+		}
+	}
+
+	protected function addBreadcrumb($title,$href){
+		$this->breadcrumb[] = array("href"=>"/$href","title"=>$title);
 	}
 
 	public function continueUrl($redirect){
@@ -27,6 +38,7 @@ class BaseAction extends Action{
 
 	public function display($action,$charset,$format){
 		$this->assign("tips",$this->tips);
+		$this->assign('breadcrumb',$this->breadcrumb);
 		return parent::display($action,$charset,$format);
 	}
 

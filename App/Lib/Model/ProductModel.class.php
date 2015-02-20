@@ -5,14 +5,14 @@ class ProductModel extends RelationModel{
         'id', 
         'productName',
         'unitPrice',
-        'categoryCode',
+        'categoryId',
         'imageUrl'
     );
     protected $_link = array(
-        'categoryCode'=> array(  
+        'categoryCode'=> array(
      		'mapping_type'=>BELONGS_TO,
       	'class_name'=>'Category',
-      	'foreign_key'=>'categoryCode',
+      	'foreign_key'=>'categoryId',
       	'mapping_name'=>'category',
  		),
     );

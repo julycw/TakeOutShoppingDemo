@@ -62,7 +62,7 @@
             </eq>
             <li>
               <a id="btn-shopping-cart" href="#" data-toggle="dropdown">购物车 
-                <span class="badge cartedProductQuantity">0</span>
+                <span class="badge cartedProductQuantity"></span>
               </a>
               <ul class="dropdown-menu dropdown-cart" role="menu">
                 <li>
@@ -120,6 +120,12 @@
     </volist>
 
     <div class="container" style="margin-bottom:50px;">
+      <ol class="breadcrumb">
+        <li><a href="__APP__">首页</a></li>
+        <volist name="breadcrumb" id="item">
+          <li><a href="__APP__{{$item.href}}">{{$item.title}}</a></li>
+        </volist>
+      </ol>
       {__CONTENT__}
     </div>
 

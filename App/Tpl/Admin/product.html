@@ -36,7 +36,7 @@
 			<tr>
 				<td>{{$item.productName}}</td>
 				<td>{{$item.category.categoryName}}</td>
-				<td>{{$item.unitPrice}}</td>
+				<td class="price-info price-info-sm">￥{{$item.unitPrice}}</td>
 				<td>
 					<div class="btn-group" role="group">
 						<button type="button" class="btn btn-default btn-xs btn-modify" data-toggle="modal" data-target="#modifyModal" data-id="{{$item.id}}">修改</button>
@@ -84,9 +84,9 @@
 				<input type="number" name="unitPrice" class="form-control" id="unitPrice">
 			</div>
 			<label for="categoryId">分类</label>
-		  	<select id="categoryId" class="form-control" name="categoryCode">
+		  	<select id="categoryId" class="form-control" name="categoryId">
 				<volist name="categories" id="category">
-					<option value="{{$category.categoryCode}}">{{$category.categoryName}}</option>
+					<option value="{{$category.id}}">{{$category.categoryName}}</option>
 				</volist>
 			</select>
 			<div class="form-group">

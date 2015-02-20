@@ -1,5 +1,6 @@
 <?php
 class OrderAction extends CustomAction {
+    protected $actionName = "我的订单";
     public function index(){
         if(!session('userName')){
             $this->needLogin();

@@ -1,5 +1,6 @@
 <?php
 class UserAction extends CustomAction {
+    protected $actionName = "个人信息";
     public function index(){
     	$UserModel = D("User");
     	$UserName = session("userName");

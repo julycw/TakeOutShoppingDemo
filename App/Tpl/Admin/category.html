@@ -33,7 +33,7 @@
 	<tbody>
 		<volist name="list" id="item">
 			<tr>
-				<td>{{$item.categoryCode}}</td>
+				<td>{{$item.categoryId}}</td>
 				<td>{{$item.categoryName}}</td>
 				<td>
 					<div class="btn-group" role="group">
@@ -74,8 +74,8 @@
       <div class="modal-body">
         <form id="add-form" action="__APP__/Admin/categoryAdd" method="post">
 		  <div class="form-group">
-		    <label for="categoryCode">分类编号</label>
-		    <input type="text" name="categoryCode" class="form-control" id="categoryCode">
+		    <label for="categoryId">分类编号</label>
+		    <input type="text" name="categoryId" class="form-control" id="categoryId">
 		  </div>
 		  <div class="form-group">
 		    <label for="categoryName">分类名称</label>

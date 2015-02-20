@@ -1,5 +1,6 @@
 <?php
 class CartAction extends CustomAction {
+    protected $actionName = "购物车";
     public function index(){
     	$this->display();
     }
