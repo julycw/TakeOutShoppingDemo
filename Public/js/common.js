@@ -31,6 +31,11 @@ $(function(){
 		$('#checkout-modal').modal('show');
 	});
 
+	$(".list-order-datedevice a").on("click",function(){
+		$(".list-order-datedevice a").removeClass("active");
+		$(this).addClass("active");
+	});
+
 	function addProductToCart(productId,quantity){
 		if(quantity == undefined){
 			quantity = 1;
@@ -57,9 +62,9 @@ $(function(){
 				var price = parseFloat(products[i].product.unitPrice) * parseFloat(products[i].quantity); 
 				var content = "<li class=\"list-group-item\"><strong>"+
 					products[i].quantity+
-					"</strong> 份 <span>"+
+					"</strong> 份 <span><strong>"+
 					products[i].product.productName+
-					"</span><span class=\"pull-right\">￥"+
+					"</strong> x ￥"+products[i].product.unitPrice+" </span><span class=\"pull-right\">= ￥"+
 					price.toFixed(2)+
 					"</span></li>";
 				$cartList.append(content);

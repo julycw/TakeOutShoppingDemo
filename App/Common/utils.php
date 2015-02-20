@@ -31,11 +31,13 @@
 		}
 
 		public function setPageIndex($pageIndex){
-			if($pageIndex == "" || $pageIndex < 1){
-				$pageIndex = 1;
-			}else if ($pageIndex > $this->pageNum){
+			if ($pageIndex > $this->pageNum){
 				$pageIndex = $this->pageNum;
 			}
+			if($pageIndex == "" || $pageIndex < 1){
+				$pageIndex = 1;
+			}
+
 			$this->firstRow = ($pageIndex-1) * $this->pageSize;
 			$this->currIndex = $pageIndex;
 			$this->makePages();

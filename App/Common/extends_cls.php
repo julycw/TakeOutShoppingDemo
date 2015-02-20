@@ -30,6 +30,10 @@ class BaseAction extends Action{
 		return parent::display($action,$charset,$format);
 	}
 
+	public function needLogin(){
+		$url = get_url();
+		redirect(__APP__."/User/login.html?redirect=$url");
+	}
 }
 
 class CustomAction extends BaseAction{
@@ -42,8 +46,7 @@ class AdmAction extends BaseAction{
 	public function _initialize(){
 		parent::_initialize();
 		if(session("role") !== "admin"){
-			$url = get_url();
-			redirect(__APP__."/User/login.html?redirect=$url");
+			$this->needLogin();
 		}
 	}
 

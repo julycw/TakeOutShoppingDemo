@@ -31,28 +31,3 @@
 		</ul>
 	</div>
 </div>
-
-<div id="checkout-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content modal-checkout-content">
-    	<div class="page-header">
-		  <h1>下单 - <small>请确认购物清单，填写收货地址</small></h1>
-		</div>
-		<ul class="list-group" id="check-out-list">
-		</ul>
-		<p class="price-info">合计:￥<strong class="priceTotal">0</strong></p>
-		<form action="__APP__/Cart/checkout" method="post">
-		  <div class="form-group">
-		    <label for="address">地址</label>
-		    <input type="text" class="form-control" id="address" placeholder="填写你的地址">
-		  </div>
-		  <div class="form-group">
-		    <label for="phone">电话</label>
-		    <input type="text" class="form-control" id="phone" placeholder="填写你的联系电话">
-		  </div>
-		  
-		  <button type="submit" class="btn btn-default">提交</button>
-		</form>
-    </div>
-  </div>
-</div>

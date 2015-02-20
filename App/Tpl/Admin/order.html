@@ -16,7 +16,7 @@
 	</ul>
 </nav>
 <table class="table data-list table-hover table-condensed" data="__APP__/Admin/orderList">
-	<caption>商品</caption>
+	<caption>订单列表</caption>
 	<thead>
 		<tr>
 			<th>订单编号</th>
@@ -36,14 +36,41 @@
 				<td>{{$item.userName}}</td>
 				<td>{{$item.address}}</td>
 				<td>{{$item.phone}}</td>
-				<td>{{$item.price}}</td>
-				<td>{{$item.status}}</td>
+				<td class="price-info price-info-sm">￥{{$item.price}}</td>
+				<td>
+		  			<switch name="item.status">
+		  				<case value="1">进行中</case>
+		  				<case value="2">已关闭</case>
+		  			</switch>
+		  		</td>
 				<td>{{$item.createOn}}</td>
 				<td>
 					<div class="btn-group" role="group">
-						<button type="button" class="btn btn-default btn-sm btn-details" data-toggle="modal" data-target="#modifyModal" data-id="{{$item.id}}">明细</button>
-						<button type="button" class="btn btn-default btn-sm btn-delete" data-toggle="modal" data-target="#deleteModal" data-id="{{$item.id}}">删除</button>
+						<button class="btn btn-default btn-xs" data-toggle="modal" data-target="#order-details-modal-{{$item.id}}">明细</button>
+						<eq name="item.status" value="1">
+							<button type="button" class="btn btn-danger btn-xs btn-delete" data-toggle="modal" data-target="#deleteModal" data-id="{{$item.id}}">关闭</button>
+						</eq>
 					</div>
+					<div id="order-details-modal-{{$item.id}}" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+				      <div class="modal-dialog">
+				        <div class="modal-content modal-order-details-content">
+				          	<h1><small>{{$item.userName}}的购物清单</small></h1>
+					        <ul class="list-group">
+					        	<volist name="item.orderDetails" id="detail">
+					        	<li class="list-group-item"><strong>
+					        		{{$detail.quantity}}</strong> 份 <span>
+					        		{{$detail.productName}}</span><span class="pull-right price-info price-info-sm">单价￥{{$detail.unitPrice}}</span></li>
+				        		</volist>
+					        </ul>
+					        <div class="panel panel-default">
+							  <div class="panel-body">
+							  	<span>地址：<strong>{{$item.address}}</strong></span><br/>
+							  	<span>电话：<strong>{{$item.phone}}</strong></span>
+							  </div>
+							</div>
+				        </div>
+				      </div>
+				    </div>
 				</td>
 			</tr>
 		</volist>
@@ -72,7 +99,7 @@
   <div class="modal-dialog modal-sm">
     <div class="modal-content">
       <div class="modal-header">
-        确定删除？
+        不可撤销，确定关闭？
       </div>
       <div class="modal-body" style="display:none;">
         <form id="delete-form" action="__APP__/Admin/orderDelete" method="post">

@@ -26,7 +26,7 @@ class AdminAction extends AdmAction {
     	$this->handleModel("Product");
     }
     public function productAdd(){
-        $fileName = time().'_'.mt_rand();
+        $fileName = time().'_'.mt_rand(1000,9999);
         import('ORG.Net.UploadFile');
         $upload = new UploadFile();// 实例化上传类
         $upload->key = "image";
@@ -79,7 +79,10 @@ class AdminAction extends AdmAction {
         $this->redirect("Admin/order");
     }
     public function orderDelete(){
-    	handleModelDelete("Order");
+    	// handleModelDelete("Order");
+        $OrderModel = D("Order");
+        $id = $_POST['id'];
+        $OrderModel->where("id=$id")->setField('status','2'); // 结束
         $this->redirect("Admin/order");
     }
 
