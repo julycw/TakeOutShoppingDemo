@@ -68,47 +68,57 @@ class CartAction extends CustomAction {
     }
 
     public function checkOut(){
-    	if(IS_POST){
-    		if(!session("userName")){
-				$this->needLogin();
-	    	}else{
-	    		$userName = session('userName');
-				$orderNumber = time().'_'.mt_rand(1000,9999); //时间戳+4位随机数
-				$address = $_POST['address'];
-				$phone = $_POST['phone'];
-				$createOn = date('Y-m-d H:i:s',time());
-				$price = 0;
-
-	    		$newOrder = array();
-
-				$CartModel = D('Cart');
-				$cart = $CartModel->where("userName='$userName'")->relation(true)->select();
-				foreach ($cart as $value) {
-					$price += $value['product']['unitPrice'] * $value['quantity'];
-					$newOrder['orderDetails'][] = array(
-						'orderNumber' => $orderNumber,
-				        'productId' => $value['productId'],
-				        'productName' => $value['product']['productName'],
-				        'unitPrice' => $value['product']['unitPrice'],
-				        'quantity' => $value['quantity']
-					);
-				}
-
-	    		$newOrder['userName'] = $userName;
-	    		$newOrder['orderNumber'] = $orderNumber;
-	    		$newOrder['address'] = $address;
-	    		$newOrder['phone'] = $phone;
-	    		$newOrder['price'] = $price;
-	    		$newOrder['createOn'] = $createOn;
-
-				if(D('Order')->relation(true)->add($newOrder)){
-					$this->clear();
-					redirect(__APP__."/Order");
-				}
-
-	    	}
+		if(!session("userName")){
+			//记录表单内容
+			session("order_address",$_POST['address']);
+			session("order_phone",$_POST['phone']);
+			$this->needLogin();
     	}else{
-			redirect(__APP__."/Shop");  		
+    		$userName = session('userName');
+			$orderNumber = time().'_'.mt_rand(1000,9999); //时间戳+4位随机数
+			if($_POST['address']){
+				$address = $_POST['address'];
+			}else if(session("order_address")){
+				$address = session("order_address");
+				session("order_address",null);
+			}
+			if($_POST['phone']){
+				$phone = $_POST['phone'];
+			}else if(session("order_phone")){
+				$phone = session("order_phone");
+				session("order_phone",null);
+			}
+			$createOn = date('Y-m-d H:i:s',time());
+			$price = 0;
+
+    		$newOrder = array();
+
+			$CartModel = D('Cart');
+			$cart = $CartModel->where("userName='$userName'")->relation(true)->select();
+			foreach ($cart as $value) {
+				$price += $value['product']['unitPrice'] * $value['quantity'];
+				$newOrder['orderDetails'][] = array(
+					'orderNumber' => $orderNumber,
+			        'productId' => $value['productId'],
+			        'productName' => $value['product']['productName'],
+			        'unitPrice' => $value['product']['unitPrice'],
+			        'quantity' => $value['quantity']
+				);
+			}
+
+    		$newOrder['userName'] = $userName;
+    		$newOrder['orderNumber'] = $orderNumber;
+    		$newOrder['address'] = $address;
+    		$newOrder['phone'] = $phone;
+    		$newOrder['price'] = $price;
+    		$newOrder['createOn'] = $createOn;
+
+			if(D('Order')->relation(true)->add($newOrder)){
+				$this->clear();
+				redirect(__APP__."/Order");
+			}else{
+				redirect(__APP__."/Shop");
+			}
     	}
     }
 

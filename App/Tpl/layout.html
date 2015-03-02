@@ -65,10 +65,10 @@
                 <span class="badge cartedProductQuantity"></span>
               </a>
               <ul class="dropdown-menu dropdown-cart" role="menu">
-                <li>
+                <!-- <li>
                   <a href="__APP__/Cart">查看购物车</a>
                 </li>
-                <li class="divider"></li>
+                <li class="divider"></li> -->
                 <li style="padding:5px;">
                   <ul class="list-group">
                   </ul>
@@ -90,36 +90,36 @@
       </div>
     </header>
 
-    <volist name="tips" id="tip">
-      <switch name="tip.level">
-        <case value="warning">
-          <div class="alert alert-warning alert-dismissible" role="alert">
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <strong>警告!</strong> {{$tip.msg}}
-          </div>
-        </case>
-        <case value="success">
-          <div class="alert alert-success alert-dismissible" role="alert">
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <strong>成功!</strong> {{$tip.msg}}
-          </div>
-        </case>
-        <case value="info">
-          <div class="alert alert-info alert-dismissible" role="alert">
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <strong>提示!</strong> {{$tip.msg}}
-          </div>
-        </case>
-        <case value="danger">
-          <div class="alert alert-danger alert-dismissible" role="alert">
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <strong>危险!</strong> {{$tip.msg}}
-          </div>
-        </case>
-      </switch>
-    </volist>
 
     <div class="container" style="margin-bottom:50px;">
+      <volist name="tips" id="tip">
+        <switch name="tip.level">
+          <case value="warning">
+            <div class="alert alert-warning alert-dismissible" role="alert">
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <strong>警告!</strong> {{$tip.msg}}
+            </div>
+          </case>
+          <case value="success">
+            <div class="alert alert-success alert-dismissible" role="alert">
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <strong>成功!</strong> {{$tip.msg}}
+            </div>
+          </case>
+          <case value="info">
+            <div class="alert alert-info alert-dismissible" role="alert">
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <strong>提示!</strong> {{$tip.msg}}
+            </div>
+          </case>
+          <case value="danger">
+            <div class="alert alert-danger alert-dismissible" role="alert">
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <strong>危险!</strong> {{$tip.msg}}
+            </div>
+          </case>
+        </switch>
+      </volist>
       <ol class="breadcrumb">
         <li><a href="__APP__">首页</a></li>
         <volist name="breadcrumb" id="item">

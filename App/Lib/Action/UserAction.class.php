@@ -17,12 +17,13 @@ class UserAction extends CustomAction {
 
     public function login(){
     	if(IS_POST){
+            $this->addTip("test");
     		$UserModel = D("User");
     		$userName = $_POST['userName'];
     		$password = $_POST['password'];
     		$user = $UserModel->where("UserName='$userName'")->find();
     		if($user){
-    			if($user['password'] == md5($password)){
+    			if($user['password'] === md5($password)){
                     session("userName",$user['userName']);
                     session("nickName",$user['nickName']);
                     session("role",$user['role']);
@@ -90,5 +91,6 @@ class UserAction extends CustomAction {
             }
             cookie('cart',null);
         }
+
     }
 }

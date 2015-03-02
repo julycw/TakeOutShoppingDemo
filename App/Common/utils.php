@@ -7,6 +7,15 @@
 	    return $sys_protocal.(isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : '').$relate_url;
 	}
 
+	function print_log($something,$fileName){
+		if(is_null($fileName)){
+			$fileName = "log.text";
+		}
+		$fp = fopen($fileName, "w");
+	    fwrite($fp, $something);
+	    fclose($fp);
+	}
+
 	class Pagination{
 		var $currIndex;
 		var $pageSize;

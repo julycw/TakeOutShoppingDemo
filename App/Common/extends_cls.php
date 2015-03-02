@@ -5,8 +5,6 @@ class BaseAction extends Action{
 	protected $breadcrumb;
 
 	public function _initialize(){
-		$this->tips = array();
-		$this->breadcrumb = array();
 		if(session('userName') != ""){
 			$this->assign('userName',session('userName'));
 			$this->assign('nickName',session('nickName'));
@@ -38,7 +36,9 @@ class BaseAction extends Action{
 
 	public function display($action,$charset,$format){
 		$this->assign("tips",$this->tips);
+		$this->tips = array();
 		$this->assign('breadcrumb',$this->breadcrumb);
+		$this->breadcrumb = array();
 		return parent::display($action,$charset,$format);
 	}
 
